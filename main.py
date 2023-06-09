@@ -3,7 +3,7 @@
 #Desc: This web application serves a motion JPEG stream
 # main.py
 # import the necessary packages
-from flask import Flask, render_template, Response, request, send_from_directory
+from flask import Flask, render_template, Response, request, send_from_directory, send_file
 from camera import VideoCamera
 import os
 
@@ -31,8 +31,7 @@ def video_feed():
 # Take a photo when pressing camera button
 @app.route('/picture')
 def take_picture():
-    pi_camera.take_picture()
-    return "None"
+    return send_file(pi_camera.buff, mimetype = "image/jpeg")
 
 if __name__ == '__main__':
 
